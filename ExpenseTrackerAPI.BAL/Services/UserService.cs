@@ -21,43 +21,31 @@ namespace ExpenseTrackerAPI.BAL.Services
         }
 
         public ResponseData Save(UserDTO vm)
-        {
-            if (string.IsNullOrEmpty(vm.FullName))
+        {          
+            if (vm.ID != 0)
             {
-                return new ResponseData
-                {
-                    SuccessStatus = false,
-                    Message = "Enter Course Name"
-                };
+                var oldData = _repo.GetById(vm.ID);
+
+                oldData.Data.FullName = vm.FullName;
+                oldData.Data.Email = vm.Email;
+                oldData.Data.IsActive = true;
+
+
+                return _repo.Update(oldData.Data);
             }
             else
             {
-
-                if (vm.ID != 0)
+                User ci = new User()
                 {
-                    var oldData = _repo.GetById(vm.ID);
-
-                    oldData.Data.FullName = vm.FullName;
-                    oldData.Data.Email = vm.Email;
-                    oldData.Data.IsActive = true;
-
-
-                    return _repo.Update(oldData.Data);
-                }
-                else
-                {
-                    User ci = new User()
-                    {
-                        ID = vm.ID,
-                        FullName = vm.FullName,
-                        Email = vm.Email,
-                        IsActive = true,
-                        Password = vm.Password
-                    };
+                    ID = vm.ID,
+                    FullName = vm.FullName,
+                    Email = vm.Email,
+                    IsActive = true,
+                    Password = vm.Password
+                };
 
 
-                    return _repo.Save(ci);
-                }
+                return _repo.Save(ci);
             }
         }
 
@@ -71,19 +59,32 @@ namespace ExpenseTrackerAPI.BAL.Services
         public ResponseData<UserDTO> GetById(int id)
         {
             var data = _repo.GetById(id);
-            var vm = new UserDTO
-            {
-                ID = data.Data.ID,
-                FullName = data.Data.FullName,
-                Email = data.Data.Email,
-                IsActive = data.Data.IsActive
-            };
 
-            return new ResponseData<UserDTO>
+            if (data.Data == null)
             {
-                SuccessStatus = true,
-                Data = vm
-            };
+                return new ResponseData<UserDTO>
+                {
+                    SuccessStatus = false,
+                    Message = "User not found"
+                };
+            }
+            else
+            {
+                var vm = new UserDTO
+                {
+                    ID = data.Data.ID,
+                    FullName = data.Data.FullName,
+                    Email = data.Data.Email,
+                    IsActive = data.Data.IsActive
+                };
+
+                return new ResponseData<UserDTO>
+                {
+                    SuccessStatus = true,
+                    Data = vm
+                };
+            }
+            
 
         }
 

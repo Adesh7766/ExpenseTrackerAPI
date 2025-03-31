@@ -1,6 +1,8 @@
 using ExpenseTrackerAPI.BAL.Interface;
 using ExpenseTrackerAPI.BAL.Services;
 using ExpenseTrackerAPI.DAL;
+using ExpenseTrackerAPI.DAL.Converter;
+using ExpenseTrackerAPI.DAL.ConverterInterface;
 using ExpenseTrackerAPI.DAL.Interface;
 using ExpenseTrackerAPI.DAL.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +18,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUsersRepo, UsersRepo>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITransactionsRepo, TransactionsRepo>();
+builder.Services.AddScoped<ITransactionsService, TransactionsService>();
+builder.Services.AddScoped<ITransactionsConverter, TransactionConverter>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 

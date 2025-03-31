@@ -1,6 +1,5 @@
 ﻿using ExpenseTrackerAPI.BAL.Interface;
 using ExpenseTrackerAPI.Entity.DTO;
-using ExpenseTrackerAPI.Entity.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,26 +7,26 @@ namespace ExpenseTrackerAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class TransactionsController : ControllerBase
     {
-        private readonly IUserService _service;
+        private readonly ITransactionsService _service;
 
-        public UserController(IUserService service)
+        public TransactionsController(ITransactionsService service)
         {
             _service = service;
         }
 
-        [HttpGet("GetAllUsers")]
-        public ActionResult GetUsers([FromQuery] string name = "")
+        [HttpGet("GetAllTransactions")]
+        public ActionResult GetTransactions([FromQuery] string name = "", string statusCode = "", string categoryCode = "")
         {
-            var response = _service.GetList(name);
+            var response = _service.GetList(name, statusCode, categoryCode);
 
             if (response.SuccessStatus)
             {
                 return Ok(new
                 {
                     Success = true,
-                    Users = response.Data
+                    Transactions = response.Data
                 });
             }
             else
@@ -36,18 +35,18 @@ namespace ExpenseTrackerAPI.Controllers
             }
         }
 
-        [HttpPost("RegisterUser")]
-        public ActionResult SaveUser([FromBody] UserDTO user)
+        [HttpPost("CreateTransaction")]
+        public ActionResult SaveTransaction([FromBody] TransactionDTO transaction)
         {
-            if(user == null)
+            if (transaction == null)
             {
-                return BadRequest("Please enter user data.");
+                return BadRequest("Please enter transaction data.");
             }
             else
             {
-                var response = _service.Save(user);
+                var response = _service.Save(transaction);
 
-                if(response.SuccessStatus == true)
+                if (response.SuccessStatus == true)
                 {
                     return Ok(response.Message);
                 }
@@ -58,8 +57,8 @@ namespace ExpenseTrackerAPI.Controllers
             }
         }
 
-        [HttpGet("DeleteUser")]
-        public ActionResult DeleteUser(int id)
+        [HttpGet("DeleteTransaction")]
+        public ActionResult DeleteTransaction(int id)
         {
             var response = _service.Delete(id);
 
@@ -73,7 +72,7 @@ namespace ExpenseTrackerAPI.Controllers
             }
         }
 
-        [HttpGet("GetUserById")]
+        [HttpGet("GetTransactionById")]
         public ActionResult GetById(int id)
         {
             var response = _service.GetById(id);

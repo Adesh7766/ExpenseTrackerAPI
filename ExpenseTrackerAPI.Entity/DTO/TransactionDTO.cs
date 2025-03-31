@@ -19,5 +19,7 @@ namespace ExpenseTrackerAPI.Entity.DTO
         public string Description { get; set; } = string.Empty;
 
         public string Category { get; set; } = string.Empty;
+
+        public bool IsActive { get; set; }
     }
 }
