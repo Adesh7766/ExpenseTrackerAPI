@@ -35,6 +35,7 @@ namespace ExpenseTrackerAPI.BAL.Services
                 oldData.Data.CreatedDate = _converter.DateConverter(vm.CreatedDate).Date;
                 oldData.Data.StatusId = _converter.StatusIDConverter(vm.Status);
                 oldData.Data.Description = vm.Description;
+                oldData.Data.Amount = vm.Amount;
                 oldData.Data.CategoryId = _converter.CategoryIDConverter(vm.Category);
                 oldData.Data.IsActive = true;
 
@@ -49,6 +50,7 @@ namespace ExpenseTrackerAPI.BAL.Services
                     CreatedDate = DateTime.Now.Date,
                     StatusId = _converter.StatusIDConverter(vm.Status),
                     Description = vm.Description,
+                    Amount = vm.Amount,
                     CategoryId = _converter.CategoryIDConverter(vm.Category),
                     IsActive = true
                 };
@@ -85,6 +87,7 @@ namespace ExpenseTrackerAPI.BAL.Services
                     CreatedDate = _converter.DateConverterIntoDTO(data.Data.CreatedDate),
                     Status = _converter.StatusIDConverterIntoDTO(data.Data.StatusId),
                     Description = data.Data.Description,
+                    Amount = data.Data.Amount,
                     Category = _converter.CategoryIDConverterIntoDTO(data.Data.CategoryId),
                     IsActive = data.Data.IsActive
                 };
@@ -108,6 +111,7 @@ namespace ExpenseTrackerAPI.BAL.Services
                 CreatedDate = _converter.DateConverterIntoDTO(abc.CreatedDate),
                 Status = _converter.StatusIDConverterIntoDTO(abc.StatusId),
                 Description = abc.Description,
+                Amount = abc.Amount,
                 Category = _converter.CategoryIDConverterIntoDTO(abc.CategoryId),
                 IsActive = abc.IsActive
             })

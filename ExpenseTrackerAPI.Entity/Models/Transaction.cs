@@ -21,6 +21,8 @@ namespace ExpenseTrackerAPI.Entity.Models
 
         public string Description { get; set; } = string.Empty;
 
+        public long Amount { get; set; }
+
         public int CategoryId { get; set; }
 
         public bool IsActive { get; set; }
