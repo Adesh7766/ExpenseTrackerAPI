@@ -17,10 +17,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUsersRepo, UsersRepo>();
-builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITransactionsRepo, TransactionsRepo>();
+builder.Services.AddScoped<IStatusRepo, StatusRepo>();
+builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
+
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITransactionsService, TransactionsService>();
+builder.Services.AddScoped<IStatusService, StatusService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 builder.Services.AddScoped<ITransactionsConverter, TransactionConverter>();
+
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
