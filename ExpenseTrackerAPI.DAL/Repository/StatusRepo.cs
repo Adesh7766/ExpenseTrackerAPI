@@ -84,7 +84,7 @@ namespace ExpenseTrackerAPI.DAL.Repository
             var data = _context.Statuses
                         .Where(x => x.IsActive == true
                             && (string.IsNullOrEmpty(name) || x.Name.Contains(name))
-                            && (string.IsNullOrEmpty(code) || x.Code.Contains(name))
+                            && (string.IsNullOrEmpty(code) || x.Code.Contains(code))
                         )
                         .ToList();
 
