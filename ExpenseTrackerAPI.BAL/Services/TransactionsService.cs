@@ -136,5 +136,17 @@ namespace ExpenseTrackerAPI.BAL.Services
                 Message = response.Message
             };
         }
+
+        public ResponseData<TotalAmountDTO> GetTotalAmount()
+        {
+            var response = _repo.GetTotalAmount();
+
+            return new ResponseData<TotalAmountDTO>
+            {
+                SuccessStatus = true,
+                Data = response.Data,
+                Message = response.Message
+            };
+        }
     }
 }

@@ -17,5 +17,7 @@ namespace ExpenseTrackerAPI.DAL.Interface
         ResponseData<Transaction> GetById(int id);
         ResponseData<List<Transaction>> GetAllList(string user, string statusCode, string categoryCode);
         ResponseData<List<TransactionByCategoryDTO>> GetTransactionByCategory();
+        ResponseData<TotalAmountDTO> GetTotalAmount();
+
     }
 }

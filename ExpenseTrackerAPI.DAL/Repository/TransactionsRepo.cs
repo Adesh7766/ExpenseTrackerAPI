@@ -116,8 +116,26 @@ namespace ExpenseTrackerAPI.DAL.Repository
                     SuccessStatus = true,
                     Data = data
                 };    
-            }    
-                
+            }                 
+        }
+
+        public ResponseData<TotalAmountDTO> GetTotalAmount()
+        {
+            using (var connection = _context.Database.GetDbConnection())
+            {
+                string spName = "GetTotalSpending";
+
+                var data = connection.Query<TotalAmountDTO>(
+                    spName,
+                    commandType: CommandType.StoredProcedure
+                ).FirstOrDefault();
+
+                return new ResponseData<TotalAmountDTO>
+                {
+                    SuccessStatus = true,
+                    Data = data
+                };
+            }           
         }
     }
 }

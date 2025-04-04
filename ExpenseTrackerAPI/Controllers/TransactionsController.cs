@@ -101,5 +101,20 @@ namespace ExpenseTrackerAPI.Controllers
                 return BadRequest(response.Message);
             }
         }
+
+        [HttpGet("GetTotalAmount")]
+        public ActionResult GetTotalAmount()
+        {
+            var response = _service.GetTotalAmount();
+
+            if (response.SuccessStatus)
+            {
+                return Ok(response.Data);
+            }
+            else
+            {
+                return BadRequest(response.Message);
+            }
+        }
     }
 }

@@ -15,5 +15,6 @@ namespace ExpenseTrackerAPI.BAL.Interface
         ResponseData<TransactionDTO> GetById(int id);
         ResponseData<List<TransactionDTO>> GetList(string user, string statusCode, string categoryCode);
         ResponseData<List<TransactionByCategoryDTO>> GetTransactionByCategory();
+        ResponseData<TotalAmountDTO> GetTotalAmount();
     }
 }
