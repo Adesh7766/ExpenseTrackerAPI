@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ExpenseTrackerAPI.Entity.Common;
+using ExpenseTrackerAPI.Entity.DTO;
 using ExpenseTrackerAPI.Entity.Models;
 
 namespace ExpenseTrackerAPI.DAL.Interface
@@ -15,5 +16,6 @@ namespace ExpenseTrackerAPI.DAL.Interface
         ResponseData Delete(int id);
         ResponseData<Transaction> GetById(int id);
         ResponseData<List<Transaction>> GetAllList(string user, string statusCode, string categoryCode);
+        ResponseData<List<TransactionByCategoryDTO>> GetTransactionByCategory();
     }
 }

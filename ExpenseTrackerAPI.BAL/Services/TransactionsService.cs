@@ -124,5 +124,17 @@ namespace ExpenseTrackerAPI.BAL.Services
                 Data = vm
             };
         }
+
+        public ResponseData<List<TransactionByCategoryDTO>> GetTransactionByCategory()
+        {
+            var response = _repo.GetTransactionByCategory();
+
+            return new ResponseData<List<TransactionByCategoryDTO>>
+            {
+                SuccessStatus = true,
+                Data = response.Data,
+                Message = response.Message
+            };
+        }
     }
 }

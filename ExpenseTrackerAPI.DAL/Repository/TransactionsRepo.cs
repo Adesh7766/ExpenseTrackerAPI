@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
 using ExpenseTrackerAPI.DAL.Interface;
 using ExpenseTrackerAPI.Entity.Common;
+using ExpenseTrackerAPI.Entity.DTO;
 using ExpenseTrackerAPI.Entity.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTrackerAPI.DAL.Repository
 {
@@ -94,6 +98,26 @@ namespace ExpenseTrackerAPI.DAL.Repository
                 SuccessStatus = true,
                 Data = data
             };
+        }
+
+        public ResponseData<List<TransactionByCategoryDTO>> GetTransactionByCategory()
+        {
+            using (var connection = _context.Database.GetDbConnection())
+            {
+                string spName = "Get_Amount_By_Category";
+
+                var data = connection.Query<TransactionByCategoryDTO>(
+                spName,
+                commandType: CommandType.StoredProcedure
+                ).ToList();
+
+                return new ResponseData<List<TransactionByCategoryDTO>>
+                {
+                    SuccessStatus = true,
+                    Data = data
+                };    
+            }    
+                
         }
     }
 }

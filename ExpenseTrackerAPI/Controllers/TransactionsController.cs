@@ -86,5 +86,20 @@ namespace ExpenseTrackerAPI.Controllers
                 return BadRequest(response.Message);
             }
         }
+
+        [HttpGet("GetTransactionByCategory")]
+        public ActionResult GetTransactionByCategory()
+        {
+            var response = _service.GetTransactionByCategory();
+
+            if (response.SuccessStatus)
+            {
+                return Ok(response.Data);
+            }
+            else
+            {
+                return BadRequest(response.Message);
+            }
+        }
     }
 }
